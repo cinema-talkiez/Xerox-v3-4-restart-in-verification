@@ -11,13 +11,14 @@ export default function VerificationSuccess() {
   }, []);
 
   // Function to restart the app
-  const handleRestartApp = () => {
-    if (window.Android) {
-      window.Android.restartApp(); // 🚀 Calls restart function in WebView
-    } else {
-      alert("Restart not supported in browser. Please reopen the tab.");
-    }
-  };
+const handleRestartApp = () => {
+  if (window.Android && typeof window.Android.restartApp === "function") {
+    window.Android.restartApp(); // 🚀 Calls Android restart function
+  } else {
+    alert("Restart not supported in browser. Please reopen the app manually.");
+  }
+};
+
 
   return (
     <div className="verification-success">
